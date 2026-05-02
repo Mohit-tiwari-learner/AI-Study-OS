@@ -19,9 +19,7 @@ export function SectionHeader({ title, badge, badgeColor, icon }: Props) {
         {title}
       </h2>
       {badge && (
-        <span className={`status-badge ${badgeColor ?? "text-muted-foreground"}`}>
-          {badge}
-        </span>
+        <span className={`status-badge ${badgeColor ?? "text-muted-foreground"}`}>{badge}</span>
       )}
     </div>
   );

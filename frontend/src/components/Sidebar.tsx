@@ -1,5 +1,12 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Brain, LayoutDashboard, Mic, FileText, CalendarRange, MessageCircleQuestion } from "lucide-react";
+import {
+  Brain,
+  LayoutDashboard,
+  Mic,
+  FileText,
+  CalendarRange,
+  MessageCircleQuestion,
+} from "lucide-react";
 
 const items = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -15,7 +22,10 @@ export function Sidebar() {
   return (
     <aside className="hidden lg:flex w-72 shrink-0 flex-col p-5 gap-5">
       {/* Brand */}
-      <Link to="/" className="nm-flat p-4 flex items-center gap-3 group hover:scale-[0.99] transition-transform active:scale-[0.97]">
+      <Link
+        to="/"
+        className="nm-flat p-4 flex items-center gap-3 group hover:scale-[0.99] transition-transform active:scale-[0.97]"
+      >
         <div className="nm-flat-sm p-2.5 animate-[float_4s_ease-in-out_infinite]">
           <Brain className="h-5 w-5 text-primary group-hover:scale-110 transition-transform" />
         </div>

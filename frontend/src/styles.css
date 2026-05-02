@@ -275,29 +275,38 @@
     animation: var(--animate-shimmer);
   }
 
-  /* ── 3D Neumorphic Text ────────────────────────────────────── */
+  /* ── 3D Neumorphic Text — Dark Fade ────────────────────────── */
   .nm-text-3d {
-    /* Slightly darker than background for crisp visibility */
-    color: color-mix(in oklab, var(--nm-base), black 4%);
+    /* Base dark color for fallback */
+    color: oklch(0.25 0.02 260); 
     font-weight: 900;
+    
+    /* Dark fade gradient */
+    background: linear-gradient(to bottom, oklch(0.20 0.02 260) 0%, oklch(0.45 0.02 260) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Refined 3D depth for dark text */
     text-shadow: 
-      -1px -1px 1px oklch(1 0 0 / 0.7),
-      -2px -2px 3px oklch(1 0 0 / 0.5),
-      1px 1px 1px oklch(0.78 0.02 255 / 0.5),
-      2px 2px 4px oklch(0.78 0.02 255 / 0.4),
-      6px 6px 12px oklch(0.78 0.02 255 / 0.25);
+      -1px -1px 0px oklch(1 0 0 / 0.15),
+      1px 1px 0px oklch(0 0 0 / 0.1),
+      2px 2px 4px oklch(0 0 0 / 0.15),
+      4px 4px 12px oklch(0 0 0 / 0.1);
+      
     letter-spacing: -0.04em;
     transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: inline-block;
   }
 
   .nm-text-3d:hover {
-    color: oklch(0.85 0 0);
-    text-shadow: 
-      -1px -1px 1px oklch(1 0 0 / 0.7),
-      -2px -2px 3px oklch(1 0 0 / 0.5),
-      2px 2px 0px oklch(0.75 0 0 / 0.2), /* Subtle grey depth */
-      4px 4px 2px oklch(0.75 0 0 / 0.15),
-      8px 8px 15px oklch(0.75 0 0 / 0.1);
+    background: linear-gradient(to bottom, oklch(0.30 0.02 260) 0%, oklch(0.55 0.02 260) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
     transform: translateY(-2px) scale(1.01);
+    text-shadow: 
+      -1px -1px 0px oklch(1 0 0 / 0.2),
+      2px 2px 8px oklch(0 0 0 / 0.2),
+      6px 6px 20px oklch(0 0 0 / 0.15);
   }
 }

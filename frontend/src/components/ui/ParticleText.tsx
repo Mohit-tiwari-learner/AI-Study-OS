@@ -129,7 +129,11 @@ export default function ParticleText({ text, progress }: ParticleTextProps) {
 
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillStyle = computedStyle.color || "#181A1B";
+      // Create a premium dark fade gradient
+      const gradient = ctx.createLinearGradient(0, height / 2 - fontSize / 2, 0, height / 2 + fontSize / 2);
+      gradient.addColorStop(0, "oklch(0.20 0.02 260)"); // Deep dark charcoal
+      gradient.addColorStop(1, "oklch(0.45 0.02 260)"); // Faded charcoal
+      ctx.fillStyle = gradient;
 
       // Draw exactly in the center so the massive font doesn't clip the top edge
       ctx.fillText(text, width / 2, height / 2);

@@ -31,7 +31,9 @@ export function Terminal() {
       </div>
       <div className="space-y-1">
         {shown.map((l, i) => (
-          <div key={i} className="text-foreground/85">{l}</div>
+          <div key={i} className="text-foreground/85">
+            {l}
+          </div>
         ))}
         <div className="inline-block w-2 h-3.5 bg-primary align-middle animate-[blink_1s_steps(2,start)_infinite]" />
       </div>

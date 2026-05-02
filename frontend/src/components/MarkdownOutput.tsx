@@ -10,7 +10,11 @@ interface Props {
  * Neumorphic inset container for AI-generated markdown output.
  * Consolidates the repeated prose + nm-inset pattern used in notes, summary, and doubt pages.
  */
-export function MarkdownOutput({ content, placeholder = "Output will appear here…", className }: Props) {
+export function MarkdownOutput({
+  content,
+  placeholder = "Output will appear here…",
+  className,
+}: Props) {
   return (
     <div
       className={`nm-prose min-h-[10rem] prose prose-sm max-w-none dark:prose-invert

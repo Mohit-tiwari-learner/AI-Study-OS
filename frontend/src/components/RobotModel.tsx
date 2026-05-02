@@ -50,9 +50,21 @@ function Robot({ mouse }: { mouse: React.RefObject<{ x: number; y: number }> }) 
     const targetYawY = vx * 4 + Math.PI * 0.15;
 
     const lerpSpeed = 0.08;
-    group.current.rotation.z = THREE.MathUtils.lerp(group.current.rotation.z, THREE.MathUtils.clamp(targetRollZ, -0.6, 0.6), lerpSpeed);
-    group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, THREE.MathUtils.clamp(targetPitchX, -0.5, 0.5), lerpSpeed);
-    group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, THREE.MathUtils.clamp(targetYawY, -0.8, 1.2), lerpSpeed);
+    group.current.rotation.z = THREE.MathUtils.lerp(
+      group.current.rotation.z,
+      THREE.MathUtils.clamp(targetRollZ, -0.6, 0.6),
+      lerpSpeed,
+    );
+    group.current.rotation.x = THREE.MathUtils.lerp(
+      group.current.rotation.x,
+      THREE.MathUtils.clamp(targetPitchX, -0.5, 0.5),
+      lerpSpeed,
+    );
+    group.current.rotation.y = THREE.MathUtils.lerp(
+      group.current.rotation.y,
+      THREE.MathUtils.clamp(targetYawY, -0.8, 1.2),
+      lerpSpeed,
+    );
   });
 
   return (

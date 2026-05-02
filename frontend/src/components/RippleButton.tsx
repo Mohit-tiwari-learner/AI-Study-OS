@@ -5,7 +5,13 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "default" | "primary";
 }
 
-export function RippleButton({ className, variant = "default", onClick, children, ...rest }: Props) {
+export function RippleButton({
+  className,
+  variant = "default",
+  onClick,
+  children,
+  ...rest
+}: Props) {
   const ref = useRef<HTMLButtonElement>(null);
 
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -31,7 +37,7 @@ export function RippleButton({ className, variant = "default", onClick, children
       className={cn(
         "nm-button px-5 py-2.5 text-sm font-semibold",
         variant === "primary" && "text-primary",
-        className
+        className,
       )}
       {...rest}
     >

@@ -20,11 +20,23 @@ export default function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
   const handleGoogleLogin = async () => {
     setLoading(true);
     try {
-      await loginWithGoogle();
-      toast.success("Welcome back!");
-      onOpenChange(false);
+      const result = await loginWithGoogle();
+      // If signInWithRedirect was used, result is undefined — the page will reload
+      if (result) {
+        toast.success("Welcome back!");
+        onOpenChange(false);
+      }
     } catch (error: any) {
-      toast.error("Google sign-in failed.");
+      const code = error?.code;
+      if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") {
+        // User closed the popup — not an error, just do nothing
+      } else if (code === "auth/network-request-failed") {
+        toast.error("Network error. Check your connection.");
+      } else if (code === "auth/internal-error") {
+        toast.error("Auth service error. Please try again.");
+      } else {
+        toast.error("Google sign-in failed. Please try again.");
+      }
     } finally {
       setLoading(false);
     }

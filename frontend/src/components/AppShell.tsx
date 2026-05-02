@@ -3,6 +3,7 @@ import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
 import { useAuth } from "@/contexts/AuthContext";
 import AuthModal from "./AuthModal";
+import { OnboardingFlow } from "./OnboardingFlow";
 import { Lock, Zap, Chrome, ArrowRight } from "lucide-react";
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -34,6 +35,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="min-h-screen w-full flex bg-background">
       <AuthModal isOpen={authModalOpen} onOpenChange={setAuthModalOpen} />
       <Sidebar />
+      <OnboardingFlow />
       <div className="flex-1 flex flex-col min-w-0">
         <Header />
         <main className="flex-1 px-5 lg:px-8 pt-6 pb-10 overflow-auto">
@@ -47,7 +49,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
                   Enter your workspace instantly. No accounts or 2FA required.
                 </p>
-                
+
                 <button
                   onClick={handleInstantAccess}
                   disabled={isLaunching}

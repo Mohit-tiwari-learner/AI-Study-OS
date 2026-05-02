@@ -1,5 +1,5 @@
 import { Bell, Moon, Search, Sun, User, LogOut, Settings } from "lucide-react";
-import { useRouterState } from "@tanstack/react-router";
+import { useRouterState, useNavigate } from "@tanstack/react-router";
 import { useTheme } from "@/lib/theme";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState } from "react";
@@ -16,10 +16,16 @@ const titles: Record<string, string> = {
 
 export function Header() {
   const path = useRouterState({ select: (s) => s.location.pathname });
+  const navigate = useNavigate();
   const { theme, toggle } = useTheme();
   const { user, logout } = useAuth();
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const title = titles[path] ?? "AI Study OS";
+
+  const handleLogout = async () => {
+    await logout();
+    navigate({ to: "/" });
+  };
 
   return (
     <header className="sticky top-0 z-30 h-18 px-5 lg:px-8 flex items-center gap-4 bg-background/70 backdrop-blur-xl">
@@ -50,7 +56,10 @@ export function Header() {
           {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
         </button>
 
-        <button aria-label="Notifications" className="nm-button h-11 w-11 flex items-center justify-center relative">
+        <button
+          aria-label="Notifications"
+          className="nm-button h-11 w-11 flex items-center justify-center relative"
+        >
           <Bell className="h-4 w-4" />
           <span className="absolute top-2.5 right-2.5 h-2 w-2 rounded-full bg-rose" />
         </button>
@@ -61,7 +70,11 @@ export function Header() {
               <button className="nm-button h-11 px-2.5 flex items-center gap-2 group">
                 <div className="h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
                   {user.photoURL ? (
-                    <img src={user.photoURL} alt={user.displayName || "User"} className="h-full w-full object-cover" />
+                    <img
+                      src={user.photoURL}
+                      alt={user.displayName || "User"}
+                      className="h-full w-full object-cover"
+                    />
                   ) : (
                     <User className="h-4 w-4 text-primary" />
                   )}
@@ -90,7 +103,7 @@ export function Header() {
                 </DropdownMenu.Item>
                 <DropdownMenu.Separator className="h-px bg-border/50 my-1" />
                 <DropdownMenu.Item
-                  onClick={() => logout()}
+                  onClick={handleLogout}
                   className="flex items-center gap-2 px-2 py-2 text-xs font-medium rounded-lg text-rose hover:bg-rose/5 cursor-pointer outline-none transition-colors"
                 >
                   <LogOut className="h-3.5 w-3.5" /> Log Out

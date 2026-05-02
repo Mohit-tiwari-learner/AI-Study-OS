@@ -117,55 +117,54 @@ function HeroPage() {
       </nav>
 
       {/* ── Hero section ──────────────────────────────────────── */}
-      <section className="relative pt-24 pb-32 px-6">
+      <section className="relative pt-32 pb-32 px-6 flex flex-col items-center justify-center min-h-[90vh]">
         {/* Ambient glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/8 via-violet/5 to-transparent blur-3xl pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-primary/10 via-violet/5 to-transparent blur-[120px] pointer-events-none" />
 
-
-        <div className="relative max-w-4xl mx-auto text-center">
+        <div className="relative max-w-5xl mx-auto text-center flex flex-col items-center z-10">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 status-badge mb-8 animate-[fade-in-up_0.5s_cubic-bezier(0.34,1.56,0.64,1)_both]">
-            <Sparkles className="h-3 w-3 text-primary" />
-            <span>Powered by Gemini AI</span>
+          <div className="inline-flex items-center gap-2 status-badge mb-8 animate-[fade-in-up_0.5s_cubic-bezier(0.34,1.56,0.64,1)_both] bg-background/50 backdrop-blur-md border border-border/50">
+            <Sparkles className="h-3.5 w-3.5 text-primary" />
+            <span className="font-semibold tracking-wide">Powered by Gemini AI</span>
           </div>
 
           {/* Headline */}
-          <h1 className="nm-text-3d font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.08] tracking-tighter py-2 animate-[fade-in-up_0.6s_cubic-bezier(0.34,1.56,0.64,1)_0.1s_both]">
-            Study smarter, <br className="hidden sm:block" />
+          <h1 className="nm-text-3d font-display font-black text-6xl sm:text-7xl md:text-8xl lg:text-[8rem] leading-[0.9] tracking-tighter py-4 animate-[fade-in-up_0.6s_cubic-bezier(0.34,1.56,0.64,1)_0.1s_both]">
+            Study smarter,<br />
             not harder
           </h1>
 
           {/* Subheadline */}
-          <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-[fade-in-up_0.6s_cubic-bezier(0.34,1.56,0.64,1)_0.2s_both]">
+          <p className="mt-8 text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-[fade-in-up_0.6s_cubic-bezier(0.34,1.56,0.64,1)_0.2s_both] font-medium">
             Your AI-powered study companion that converts voice to notes, generates summaries & quizzes, builds study plans, and solves doubts instantly.
           </p>
 
           {/* CTA buttons */}
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-[fade-in-up_0.6s_cubic-bezier(0.34,1.56,0.64,1)_0.3s_both]">
+          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5 animate-[fade-in-up_0.6s_cubic-bezier(0.34,1.56,0.64,1)_0.3s_both] w-full sm:w-auto">
             {user ? (
               <Link
                 to="/dashboard"
-                className="nm-button px-8 py-4 text-base font-semibold text-primary-foreground flex items-center gap-2.5 group"
+                className="nm-button w-full sm:w-auto px-10 py-5 text-lg font-bold text-primary-foreground flex items-center justify-center gap-3 group rounded-2xl"
                 style={{ background: "var(--gradient-primary)" }}
               >
-                <Zap className="h-4.5 w-4.5" />
+                <Zap className="h-5 w-5 fill-white/20" />
                 Go to Dashboard
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             ) : (
               <button
                 onClick={() => setAuthModalOpen(true)}
-                className="nm-button px-8 py-4 text-base font-semibold text-primary-foreground flex items-center gap-2.5 group"
+                className="nm-button w-full sm:w-auto px-10 py-5 text-lg font-bold text-primary-foreground flex items-center justify-center gap-3 group rounded-2xl"
                 style={{ background: "var(--gradient-primary)" }}
               >
-                <Zap className="h-4.5 w-4.5" />
+                <Zap className="h-5 w-5 fill-white/20" />
                 Get Started Free
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </button>
             )}
             <a
               href="#features"
-              className="nm-button px-8 py-4 text-base font-semibold text-foreground/80 flex items-center gap-2"
+              className="nm-button w-full sm:w-auto px-10 py-5 text-lg font-bold text-foreground/80 flex items-center justify-center gap-2 rounded-2xl transition-all hover:text-primary"
             >
               See Features
             </a>
@@ -177,18 +176,18 @@ function HeroPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4, duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
-            className="mt-24 relative max-w-4xl mx-auto group"
+            className="mt-24 relative max-w-5xl mx-auto group w-full px-4 sm:px-0"
           >
             {/* Ambient Outer Glow */}
             <div className="absolute -inset-1 bg-gradient-to-r from-primary/10 via-violet/10 to-primary/10 rounded-[2.5rem] blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
             
             {/* Container */}
-            <div className="relative nm-flat rounded-[2.5rem] p-2 sm:p-3 flex flex-col sm:flex-row items-stretch justify-between overflow-hidden">
+            <div className="relative nm-flat rounded-[2.5rem] p-2 sm:p-4 flex flex-col sm:flex-row items-stretch justify-between overflow-hidden">
               {/* Inner glass reflection */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
               
               {stats.map((s, i) => (
-                <div key={i} className="relative flex-1 flex flex-col items-center justify-center py-8 sm:py-10 hover:bg-muted/10 transition-all duration-500 rounded-[2rem] overflow-hidden cursor-default group/stat">
+                <div key={i} className="relative flex-1 flex flex-col items-center justify-center py-8 sm:py-12 px-4 hover:bg-muted/10 transition-all duration-500 rounded-[2rem] overflow-hidden cursor-default group/stat">
                   {/* Separators */}
                   {i !== stats.length - 1 && (
                     <div className="absolute right-0 top-1/4 bottom-1/4 w-px bg-gradient-to-b from-transparent via-foreground/10 to-transparent hidden sm:block" />
@@ -198,11 +197,11 @@ function HeroPage() {
                   )}
                   
                   {/* Content */}
-                  <div className="relative z-10 flex flex-col items-center transform transition-transform duration-500 group-hover/stat:-translate-y-1">
-                    <span className="text-4xl sm:text-5xl md:text-6xl font-display font-black bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/50 tracking-tighter drop-shadow-sm group-hover/stat:scale-105 transition-transform duration-500">
+                  <div className="relative z-10 flex flex-col items-center transform transition-transform duration-500 group-hover/stat:-translate-y-1 w-full">
+                    <span className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/50 tracking-tighter drop-shadow-sm group-hover/stat:scale-105 transition-transform duration-500 text-center">
                       {s.value}
                     </span>
-                    <span className="mt-3 text-[10px] sm:text-xs font-bold tracking-[0.2em] text-muted-foreground uppercase group-hover/stat:text-primary transition-colors duration-500">
+                    <span className="mt-3 text-[10px] sm:text-[9px] md:text-[10px] lg:text-xs font-bold tracking-[0.2em] text-muted-foreground uppercase group-hover/stat:text-primary transition-colors duration-500 text-center mx-auto max-w-[140px]">
                       {s.label}
                     </span>
                   </div>

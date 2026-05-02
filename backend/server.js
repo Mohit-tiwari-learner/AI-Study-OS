@@ -1,7 +1,12 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(cors());
@@ -132,7 +137,17 @@ app.post("/api/doubt", async (req, res) => {
   }
 });
 
-app.get("/", (_req, res) => res.json({ ok: true, service: "ai-study-os-backend" }));
+// API root
+app.get("/api", (_req, res) => res.json({ ok: true, service: "ai-study-os-backend" }));
+
+// 5) Serve Static Files (Frontend)
+const distPath = path.join(__dirname, "../frontend/dist");
+app.use(express.static(distPath));
+
+// Catch-all route for SPA
+app.get("*", (req, res) => {
+  res.sendFile(path.join(distPath, "index.html"));
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`✨ AI Study OS backend running on http://localhost:${PORT}`));

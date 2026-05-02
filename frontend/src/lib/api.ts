@@ -1,7 +1,8 @@
 // Frontend talks to the local Express backend (see /backend).
 // Override with VITE_API_URL if your backend runs elsewhere.
 export const API_URL =
-  (import.meta as any).env?.VITE_API_URL || "http://localhost:5000";
+  (import.meta as any).env?.VITE_API_URL || 
+  ((import.meta as any).env?.PROD ? "" : "http://localhost:5000");
 
 export async function callApi<T = any>(path: string, body: unknown): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, {
