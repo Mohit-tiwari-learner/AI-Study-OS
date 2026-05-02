@@ -6,6 +6,8 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { callApi } from "@/lib/api";
 import { CalendarRange, Loader2 } from "lucide-react";
 
+import { useTrackActivity } from "@/hooks/useTrackActivity";
+
 export const Route = createFileRoute("/planner")({
   head: () => ({
     meta: [
@@ -30,6 +32,8 @@ function PlannerPage() {
   const [plan, setPlan] = useState<Day[]>([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
+  
+  const { incrementStat, addActivity } = useTrackActivity();
 
   const run = async () => {
     if (!syllabus.trim() || !deadline) return;
@@ -39,6 +43,18 @@ function PlannerPage() {
     try {
       const data = await callApi<{ plan: Day[] }>("/api/planner", { syllabus, deadline, hoursPerDay: hours });
       setPlan(data.plan ?? []);
+      
+      // Update stats
+      incrementStat("planAdherence", 5); // Add an arbitrary 5% to their plan score
+      incrementStat("focusMinutes", hours * 60); // Assume they commit these hours
+      
+      addActivity({
+        iconName: "Target",
+        title: "Study plan created",
+        meta: `Deadline: ${new Date(deadline).toLocaleDateString()}`,
+        color: "text-violet",
+      });
+      
     } catch (e: any) {
       setErr(e.message);
     } finally {

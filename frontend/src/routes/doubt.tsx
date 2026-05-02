@@ -7,6 +7,8 @@ import { callApi } from "@/lib/api";
 import { Send, Loader2, Sparkles } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
+import { useTrackActivity } from "@/hooks/useTrackActivity";
+
 export const Route = createFileRoute("/doubt")({
   head: () => ({
     meta: [
@@ -27,6 +29,8 @@ function DoubtPage() {
   const [hinglish, setHinglish] = useState(false);
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  
+  const { addActivity } = useTrackActivity();
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -45,6 +49,15 @@ function DoubtPage() {
         hinglish,
       });
       setMessages((m) => [...m, { role: "assistant", content: data.answer }]);
+      
+      // Update activity
+      addActivity({
+        iconName: "Sparkles",
+        title: hinglish ? "Solved doubt (Hinglish)" : "Solved doubt",
+        meta: `Topic: ${q.substring(0, 30)}${q.length > 30 ? "..." : ""}`,
+        color: "text-rose",
+      });
+      
     } catch (e: any) {
       setMessages((m) => [...m, { role: "assistant", content: `> Error: ${e.message}` }]);
     } finally {

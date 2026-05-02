@@ -17,17 +17,22 @@ if (!apiKey) {
   console.warn("⚠️  GEMINI_API_KEY missing. Set it in backend/.env");
 }
 const genAI = new GoogleGenerativeAI(apiKey || "");
-const MODEL = "gemini-1.5-flash";
+const MODEL = "gemini-2.5-flash";
 
 async function gen(prompt, { json = false } = {}) {
-  const model = genAI.getGenerativeModel({
-    model: MODEL,
-    ...(json
-      ? { generationConfig: { responseMimeType: "application/json" } }
-      : {}),
-  });
-  const r = await model.generateContent(prompt);
-  return r.response.text();
+  try {
+    const model = genAI.getGenerativeModel({
+      model: MODEL,
+      ...(json
+        ? { generationConfig: { responseMimeType: "application/json" } }
+        : {}),
+    });
+    const r = await model.generateContent(prompt);
+    return r.response.text();
+  } catch (error) {
+    console.error("Gemini API Error:", error);
+    throw error;
+  }
 }
 
 // 1) Voice/text → structured notes

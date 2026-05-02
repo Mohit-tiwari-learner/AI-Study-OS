@@ -7,6 +7,8 @@ import { MarkdownOutput } from "@/components/MarkdownOutput";
 import { callApi } from "@/lib/api";
 import { Mic, MicOff, Sparkles, Loader2 } from "lucide-react";
 
+import { useTrackActivity } from "@/hooks/useTrackActivity";
+
 export const Route = createFileRoute("/notes")({
   head: () => ({
     meta: [
@@ -23,6 +25,8 @@ function NotesPage() {
   const [loading, setLoading] = useState(false);
   const [listening, setListening] = useState(false);
   const recRef = useRef<any>(null);
+  
+  const { incrementStat, addActivity } = useTrackActivity();
 
   useEffect(() => {
     const SR =
@@ -64,6 +68,15 @@ function NotesPage() {
     try {
       const data = await callApi<{ notes: string }>("/api/notes", { text });
       setNotes(data.notes);
+      
+      // Update dashboard stats
+      incrementStat("notesCaptured", 1);
+      addActivity({
+        iconName: "BookOpen",
+        title: "Notes structured from input",
+        color: "text-emerald",
+      });
+      
     } catch (e: any) {
       setNotes(`> Error reaching backend.\n\n${e.message}\n\nMake sure the Express server is running on http://localhost:5000`);
     } finally {

@@ -7,6 +7,8 @@ import { MarkdownOutput } from "@/components/MarkdownOutput";
 import { callApi } from "@/lib/api";
 import { FileText, Loader2, ListChecks, HelpCircle } from "lucide-react";
 
+import { useTrackActivity } from "@/hooks/useTrackActivity";
+
 export const Route = createFileRoute("/summary")({
   head: () => ({
     meta: [
@@ -28,6 +30,8 @@ function SummaryPage() {
   const [result, setResult] = useState<Result | null>(null);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
+  
+  const { incrementStat, addActivity } = useTrackActivity();
 
   const run = async () => {
     if (!notes.trim()) return;
@@ -37,6 +41,15 @@ function SummaryPage() {
     try {
       const data = await callApi<Result>("/api/summary", { notes });
       setResult(data);
+      
+      // Update stats
+      incrementStat("quizzesGenerated", 1);
+      addActivity({
+        iconName: "Brain",
+        title: `Generated ${data.questions?.length || 5} quiz questions`,
+        color: "text-indigo",
+      });
+      
     } catch (e: any) {
       setErr(e.message);
     } finally {
