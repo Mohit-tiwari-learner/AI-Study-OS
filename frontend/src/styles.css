@@ -68,7 +68,7 @@
   /* Neumorphic surface — slightly more muted/faded */
   --background: oklch(0.92 0.01 255);
   --foreground: oklch(0.35 0.04 260);
-  --ink: oklch(0.20 0.02 260);
+  --ink: oklch(0.60 0 0);
 
   --nm-base: oklch(0.92 0.01 255);
   --nm-light: oklch(1 0 0 / 0.7);
@@ -94,7 +94,7 @@
 .dark {
   --background: oklch(0.22 0.04 275);
   --foreground: oklch(0.94 0.01 255);
-  --ink: oklch(0.94 0.01 255);
+  --ink: oklch(0.85 0 0);
 
   --nm-base: oklch(0.22 0.04 275);
   --nm-light: oklch(0.27 0.045 275);
@@ -277,31 +277,27 @@
 
   /* ── 3D Neumorphic Text ────────────────────────────────────── */
   .nm-text-3d {
-    /* Perfectly matched to background for a 'ghostly' carved look */
-    color: var(--nm-base);
+    /* Slightly darker than background for crisp visibility */
+    color: color-mix(in oklab, var(--nm-base), black 4%);
     font-weight: 900;
     text-shadow: 
-      -1px -1px 0px oklch(1 0 0 / 0.4),
-      -2px -2px 1px oklch(1 0 0 / 0.3),
-      -4px -4px 10px oklch(1 0 0 / 0.2),
-      1px 1px 0px oklch(0.78 0.02 255 / 0.4),
-      2px 2px 1px oklch(0.78 0.02 255 / 0.35),
-      4px 4px 12px oklch(0.78 0.02 255 / 0.3);
+      -1px -1px 1px oklch(1 0 0 / 0.7),
+      -2px -2px 3px oklch(1 0 0 / 0.5),
+      1px 1px 1px oklch(0.78 0.02 255 / 0.5),
+      2px 2px 4px oklch(0.78 0.02 255 / 0.4),
+      6px 6px 12px oklch(0.78 0.02 255 / 0.25);
     letter-spacing: -0.04em;
     transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    opacity: 0.9;
   }
 
   .nm-text-3d:hover {
-    /* Very light ice-blue tint on hover */
-    color: oklch(0.95 0.02 255);
+    color: oklch(0.85 0 0);
     text-shadow: 
-      -2px -2px 0px oklch(1 0 0 / 0.6),
-      -4px -4px 2px oklch(1 0 0 / 0.5),
-      -6px -6px 15px oklch(1 0 0 / 0.4),
-      2px 2px 0px oklch(0.58 0.1 255 / 0.2), /* Subtle blue depth */
-      4px 4px 2px oklch(0.58 0.1 255 / 0.15),
-      8px 8px 15px oklch(0.58 0.1 255 / 0.1);
+      -1px -1px 1px oklch(1 0 0 / 0.7),
+      -2px -2px 3px oklch(1 0 0 / 0.5),
+      2px 2px 0px oklch(0.75 0 0 / 0.2), /* Subtle grey depth */
+      4px 4px 2px oklch(0.75 0 0 / 0.15),
+      8px 8px 15px oklch(0.75 0 0 / 0.1);
     transform: translateY(-2px) scale(1.01);
   }
 }

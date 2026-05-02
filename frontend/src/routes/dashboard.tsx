@@ -5,6 +5,8 @@ import { ProgressBar } from "@/components/ProgressBar";
 import { Terminal } from "@/components/Terminal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { BookOpen, Brain, Clock, Target, Sparkles } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -64,6 +66,24 @@ function DashboardPage() {
           <ProgressBar label="Memory cache" value={48} color="emerald" />
           <ProgressBar label="Token budget" value={91} color="violet" />
           <ProgressBar label="Session quality" value={84} color="rose" />
+        </div>
+      </div>
+
+      {/* Interactive Whiteboard */}
+      <div className="mt-6 space-y-4">
+        <SectionHeader title="Interactive Whiteboard" badge="beta" badgeColor="text-violet" />
+        <div className="nm-flat h-64 sm:h-96 w-full rounded-2xl flex items-center justify-center bg-white/50 dark:bg-black/10 border-2 border-dashed border-border/50 relative overflow-hidden group">
+          <div className="text-center">
+            <Sparkles className="h-8 w-8 text-muted-foreground mx-auto mb-3 opacity-50 group-hover:opacity-100 transition-opacity" />
+            <p className="text-muted-foreground font-medium">AI Whiteboard Canvas</p>
+            <p className="text-xs text-muted-foreground/70 mt-1">Start sketching or typing equations...</p>
+          </div>
+        </div>
+        
+        {/* Toggle Button Below Whiteboard */}
+        <div className="flex items-center space-x-2 pt-2">
+          <Switch id="ai-assist" />
+          <Label htmlFor="ai-assist" className="cursor-pointer">Enable AI Real-time Assist</Label>
         </div>
       </div>
 

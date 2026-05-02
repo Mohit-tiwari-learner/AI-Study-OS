@@ -90,12 +90,12 @@ export default function AuthModal({ isOpen, onOpenChange }: AuthModalProps) {
               <div className="h-14 w-14 nm-flat mx-auto flex items-center justify-center mb-4 text-primary animate-[float_4s_ease-in-out_infinite]">
                 <Zap className="h-7 w-7 fill-primary/20" />
               </div>
-              <h2 className="text-2xl font-display font-bold tracking-tight mb-2">
+              <Dialog.Title className="text-2xl font-display font-bold tracking-tight mb-2">
                 {showEmail ? (mode === "login" ? "Email Sign In" : "Create Account") : "Welcome"}
-              </h2>
-              <p className="text-sm text-muted-foreground">
+              </Dialog.Title>
+              <Dialog.Description className="text-sm text-muted-foreground">
                 {showEmail ? "Enter your details below" : "Choose how you'd like to enter."}
-              </p>
+              </Dialog.Description>
             </div>
 
             {!showEmail ? (

@@ -171,26 +171,59 @@ function HeroPage() {
             </a>
           </div>
 
-          {/* Stats row */}
-          <div className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto animate-[fade-in-up_0.6s_cubic-bezier(0.34,1.56,0.64,1)_0.5s_both]">
-            {stats.map((s, i) => (
-              <div key={i} className="nm-flat p-4 text-center">
-                <p className="text-2xl sm:text-3xl font-display font-bold text-primary">{s.value}</p>
-                <p className="mt-1 text-xs text-muted-foreground">{s.label}</p>
-              </div>
-            ))}
-          </div>
+          {/* Premium Stats Row */}
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
+            className="mt-24 relative max-w-4xl mx-auto group"
+          >
+            {/* Ambient Outer Glow */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary/10 via-violet/10 to-primary/10 rounded-[2.5rem] blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+            
+            {/* Container */}
+            <div className="relative nm-flat rounded-[2.5rem] p-2 sm:p-3 flex flex-col sm:flex-row items-stretch justify-between overflow-hidden">
+              {/* Inner glass reflection */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+              
+              {stats.map((s, i) => (
+                <div key={i} className="relative flex-1 flex flex-col items-center justify-center py-8 sm:py-10 hover:bg-muted/10 transition-all duration-500 rounded-[2rem] overflow-hidden cursor-default group/stat">
+                  {/* Separators */}
+                  {i !== stats.length - 1 && (
+                    <div className="absolute right-0 top-1/4 bottom-1/4 w-px bg-gradient-to-b from-transparent via-foreground/10 to-transparent hidden sm:block" />
+                  )}
+                  {i !== stats.length - 1 && (
+                    <div className="absolute bottom-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent sm:hidden" />
+                  )}
+                  
+                  {/* Content */}
+                  <div className="relative z-10 flex flex-col items-center transform transition-transform duration-500 group-hover/stat:-translate-y-1">
+                    <span className="text-4xl sm:text-5xl md:text-6xl font-display font-black bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/50 tracking-tighter drop-shadow-sm group-hover/stat:scale-105 transition-transform duration-500">
+                      {s.value}
+                    </span>
+                    <span className="mt-3 text-[10px] sm:text-xs font-bold tracking-[0.2em] text-muted-foreground uppercase group-hover/stat:text-primary transition-colors duration-500">
+                      {s.label}
+                    </span>
+                  </div>
+                  
+                  {/* Micro-interaction background glow */}
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-gradient-to-t from-primary/10 to-transparent blur-xl opacity-0 group-hover/stat:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ── Features section ──────────────────────────────────── */}
-      <section id="features" className="py-32 px-6 relative overflow-hidden">
+      <section id="features" className="py-20 md:py-32 px-4 sm:px-6 relative overflow-hidden">
         {/* Background Decorative Shapes */}
-        <div className="absolute top-1/4 -right-20 w-80 h-80 nm-flat rounded-full opacity-30 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 -left-20 w-80 h-80 nm-inset rounded-full opacity-30 blur-3xl pointer-events-none" />
+        <div className="absolute top-1/4 -right-20 w-64 h-64 md:w-80 md:h-80 nm-flat rounded-full opacity-30 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/4 -left-20 w-64 h-64 md:w-80 md:h-80 nm-inset rounded-full opacity-30 blur-3xl pointer-events-none" />
 
         <div className="max-w-6xl mx-auto relative">
-          <div className="text-center mb-20">
+          <div className="text-center mb-16 md:mb-20">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -199,15 +232,15 @@ function HeroPage() {
             >
               <Zap className="h-3 w-3 text-primary animate-pulse" /> Feature Suite
             </motion.div>
-            <h2 className="nm-text-3d font-display font-black text-3xl sm:text-5xl md:text-6xl tracking-tight mt-6 leading-tight">
+            <h2 className="nm-text-3d font-display font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight mt-4 md:mt-6 leading-tight">
               Master your syllabus <br className="hidden sm:block" /> with AI precision
             </h2>
-            <p className="mt-6 text-muted-foreground max-w-xl mx-auto text-lg leading-relaxed">
+            <p className="mt-4 md:mt-6 text-muted-foreground max-w-xl mx-auto text-base md:text-lg leading-relaxed">
               Four revolutionary tools designed to automate the boring parts of studying, so you can focus on learning.
             </p>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
+          <div className="grid gap-6 md:gap-8 md:grid-cols-2">
             {features.map((f, i) => (
               <motion.div
                 key={i}
@@ -216,32 +249,32 @@ function HeroPage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
                 whileHover={{ y: -8 }}
-                className="nm-flat p-10 group relative overflow-hidden flex flex-col md:flex-row items-start gap-8 hover:shadow-[12px_12px_24px_rgba(0,0,0,0.05),-12px_-12px_24px_rgba(255,255,255,0.8)] transition-all duration-500"
+                className="nm-flat p-6 md:p-10 group relative overflow-hidden flex flex-col sm:flex-row items-start gap-6 md:gap-8 hover:shadow-[12px_12px_24px_rgba(0,0,0,0.05),-12px_-12px_24px_rgba(255,255,255,0.8)] transition-all duration-500"
               >
                 {/* Floating Glow */}
                 <div className={`absolute -right-10 -top-10 w-32 h-32 bg-gradient-to-br ${f.gradient} opacity-0 group-hover:opacity-10 blur-3xl transition-opacity duration-500`} />
 
                 <div className="relative shrink-0">
-                  <div className={`nm-flat p-5 inline-flex rounded-2xl bg-gradient-to-br ${f.gradient} group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
-                    <f.icon className={`h-8 w-8 ${f.color} drop-shadow-sm`} />
+                  <div className={`nm-flat p-4 md:p-5 inline-flex rounded-2xl bg-gradient-to-br ${f.gradient} group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
+                    <f.icon className={`h-6 w-6 md:h-8 md:w-8 ${f.color} drop-shadow-sm`} />
                   </div>
                 </div>
 
                 <div className="relative flex-1">
-                  <h3 className="font-display font-bold text-2xl tracking-tight mb-3 group-hover:text-primary transition-colors">
+                  <h3 className="font-display font-bold text-xl md:text-2xl tracking-tight mb-2 md:mb-3 group-hover:text-primary transition-colors">
                     {f.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed text-base mb-6">
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base mb-4 md:mb-6">
                     {f.desc}
                   </p>
                   
-                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-500">
+                  <div className="flex items-center gap-2 text-[10px] md:text-xs font-bold uppercase tracking-widest text-primary opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-hover:translate-x-2 transition-all duration-500">
                     Explore Tool <ArrowRight className="h-3 w-3" />
                   </div>
                 </div>
 
                 {/* Decorative index */}
-                <span className="absolute bottom-6 right-8 text-7xl font-display font-black text-foreground/[0.03] pointer-events-none group-hover:text-primary/5 transition-colors">
+                <span className="absolute bottom-4 right-6 md:bottom-6 md:right-8 text-5xl md:text-7xl font-display font-black text-foreground/[0.03] pointer-events-none group-hover:text-primary/5 transition-colors">
                   0{i + 1}
                 </span>
               </motion.div>
